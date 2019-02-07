@@ -1,0 +1,22 @@
+<!-- Followers Page -->
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark text-white">
+    <a routerLink="/profile" class="navbar-brand"><h4>Github Profiles</h4></a>
+</nav>
+<ng-template [ngIf]="userFollower">
+<div class="container">
+        <div class="row">
+            <div *ngFor="let user of userFollower" class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6 mt-4">
+                <div class="border">
+                    <img [src]="user.avatar_url" class="img-thumbnail">
+                    <div class="caption text-center mt-1">
+                        <h5>{{ user.login }}</h5>
+                        <p>
+                             <button (click)="viewUser(user)" class="btn btn-primary btn-sm" role="button">More Info</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </ng-template>

@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark text-white">
+    <a routerLink="/profile" class="navbar-brand"><h4>Github Profiles</h4></a>
+</nav>
+
+<!-- Details Page -->
+
+<ng-template [ngIf]="selectedUser">
+    <div class="container mt-5">
+        <div class="card">
+            <h5 class="card-header">
+                {{selectedUser.name}}
+            </h5>
+            <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="img-thumbnail" src="{{selectedUser.avatar_url}}" alt="">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="stats">
+                                <span class="badge badge-primary">Public Repos: {{ selectedUser.public_repos }}</span>
+                                <span class="badge badge-success">Public Gists: {{ selectedUser.public_gists }}</span>
+                                <span class="badge badge-info">Followers: {{ selectedUser.followers }}</span>
+                                <span class="badge badge-warning">Following: {{ selectedUser.following }}</span>
+                            </div><br>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Username: </strong> {{ selectedUser.name }} </li>
+                                <li class="list-group-item"><strong>Company: </strong> {{ selectedUser.company }} </li>
+                                <li class="list-group-item"><strong>Email: </strong> {{ selectedUser.email }} NA </li>
+                                <li class="list-group-item"><strong>Blog: </strong> {{ selectedUser.blog }} </li>
+                                <li class="list-group-item"><strong>Location: </strong> {{ selectedUser.location }} </li>
+                                <li class="list-group-item"><strong>Bio: </strong> {{ selectedUser.bio }} </li>
+                                <li class="list-group-item"><strong>Member Since: </strong> {{ selectedUser.created_at }} </li>
+                            </ul><br>
+                            <button (click)="viewFollower()" class="btn btn-primary">Number of followers<span class="badge badge-light">{{ selectedUser.followers }}</span></button>
+                      </div>
+                 </div>   
+             </div>        
+        </div>
+        <div class="card mt-3">
+            <h5 class="card-header">
+                {{ selectedUser.name }}'s Repos
+            </h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div *ngFor="let repo of repos">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4><a href="{{ repo.html_url }}" target="blank">{{ repo.name }}</a></h4>
+                                    <p>Description: {{ repo.description }}</p>
+                                    <p>Language: {{ repo.language }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="badge badge-primary">{{ repo.watchers }} Watchers</span>
+                                    <span class="badge badge-success">{{ repo.forks }} Forks</span>
+                                </div>
+                            </div><hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>     
+    </div>
+</ng-template>
+
+
+<!-- Entry Page (List of all the users) -->
+
+<ng-template [ngIf]="!selectedUser">
+<div class="container">
+   <div class="row">
+     <div *ngFor="let user of users" class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6 mt-4">
+        <div class="border">
+            <img [src]= "user.avatar_url" class="img-thumbnail">
+            <div class="caption text-center mt-1">
+                <h5>{{ user.login }}</h5>
+                <p>
+                    <button (click)="viewUser()" class="btn btn-primary btn-sm" role="button">More Info</button>
+                </p>
+            </div>
+        </div>
+     </div>
+   </div>
+</div>
+</ng-template>
+
+
